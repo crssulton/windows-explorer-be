@@ -121,4 +121,12 @@ export class FoldersService {
 
     return roots;
   }
+
+  async search(name: string): Promise<FolderResponseDto[]> {
+    const query = this.folderRepository
+      .createQueryBuilder('folder')
+      .where('LOWER(folder.name) LIKE LOWER(:name)', { name: `%${name}%` });
+
+    return query.getMany();
+  }
 }

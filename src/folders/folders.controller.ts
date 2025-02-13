@@ -38,4 +38,9 @@ export class FoldersController {
   ): Promise<FolderResponseDto[]> {
     return this.foldersService.getDirectChildren(id, page, limit);
   }
+
+  @Post('search')
+  async search(@Body() body: { name: string }): Promise<FolderResponseDto[]> {
+    return this.foldersService.search(body.name);
+  }
 }
